@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Schedule</title>
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+</head>
+
+<body>
+    <!-- where data goes -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <div class="jumbotron">
+        <h1 class="text-center">Anytime is Train Time</h1>
+        <h2 class="text-center">Choo Choo. Chee Chee.</h2>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">Current Train Schedule</div>
+            <br>
+            <div class="row">
+                <div class="col-sm-2">data</div>
+                <div class="col-sm-2">data</div>
+                <div class="col-sm-2">data</div>
+                <div class="col-sm-2">data</div>
+                <div class="col-sm-2">data</div>
+                <div class="col-sm-2">data</div>
+            </div>
+        </div>
+    </div>
+    <!-- form part -->
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">Add Train</div>
+        </div>
+        <div class="col-lg-12">
+            <form role="form">
+                <div class="form-group row">
+                    <label for="name-input">Train Name:</label>
+                    <input class="form-control" id="name-input" type="text">
+                </div>
+                <div class="form-group row">
+                    <label for="destination-input">Destination:</label>
+                    <input class="form-control" id="destination-input" type="text">
+                </div>
+                <div class="form-group row">
+                    <label for="train-input">First Train Time:</label>
+                    <input class="form-control" id="train-input" type="text">
+                </div>
+                <div class="form-group row">
+                    <label for="frequency-input">Frequency:</label>
+                    <input class="form-control" id="frequency-input" type="text"></textarea>
+                </div>
+                <button class="btn btn-default" id="add-user" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAAgIHjLlwCa4OjAsVU2EjGp84dsUifULg",
+            authDomain: "trains-d944b.firebaseapp.com",
+            databaseURL: "https://trains-d944b.firebaseio.com",
+            projectId: "trains-d944b",
+            storageBucket: "trains-d944b.appspot.com",
+            messagingSenderId: "24634207288"
+        };
+        firebase.initializeApp(config);
+
+        var database = firebase.database();
+
+        $("#add-user").on("click", function (event) {
+            // Don't refresh the page!
+            event.preventDefault();
+            // set variable equal to input you get from the user
+            var train_name = $("#name-input").val().trim();
+            var destination = $("#destination-input").val().trim();
+            var first_time = $("#train-input").val().trim();
+            var frequency = $("#frequency-input").val().trim();
+
+            database.ref().push({
+                train_name: train_name,
+                destination: destination,
+                first_time: first_time,
+                frequency: frequency
+            });
+        });
+        database.ref().on("value", function (snapshot) {
+
+            console.log(snapshot.val());
+            console.log(snapshot.val().train_name);
+            console.log(snapshot.val().destination);
+            console.log(snapshot.val().first_time);
+            console.log(snapshot.val().frequency);
+
+        });
+    </script>
+</body>
+
+</html>
