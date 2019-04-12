@@ -1,0 +1,31 @@
+p {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif; 
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+td {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#container {
+    background-color: brown;
+    color:white;
+}
+
+body {
+    background-color: grey;
+}
+div.card-body {
+background-color: brown;
+}
+
+table {
+    background-color: brown;
+}
